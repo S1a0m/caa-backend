@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String
 from app.core.database import Base
 
-class User(Base):
-    __tablename__ = "users"
-
+class Sanction(Base):
+    __tablename__ = "sanctions"
+    
     id = Column(Integer, primary_key=True, index=True)
-    matricule = Column(String, unique=True, index=True, nullable=False)
+    title = Column(String, nullable=False)
+    description = Column(String)

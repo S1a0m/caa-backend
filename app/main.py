@@ -1,7 +1,7 @@
 # app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import sanctions  
+from app.routes import sanctions, user, crossroad  
 
 app = FastAPI()
 
@@ -15,7 +15,9 @@ app.add_middleware(
 )
 
 # Inclusion des routes
-app.include_router(sanctions.router, prefix="/sanctions", tags=["Sanctions"])
+app.include_router(sanctions.router, prefix="/api")
+app.include_router(user.router, prefix="/api")
+app.include_router(crossroad.router, prefix="/api")
 
 @app.get("/")
 def root():
