@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from app.schemas.traffic_light import TrafficLightRead
 
 
 class CrossroadBase(BaseModel):

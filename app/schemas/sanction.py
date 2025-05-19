@@ -1,16 +1,14 @@
 from pydantic import BaseModel
-from datetime import datetime
 
 class SanctionBase(BaseModel):
-    reason: str
-    amount: float
+    title: str
+    description: str
 
 class SanctionCreate(SanctionBase):
-    user_id: int
+    pass
 
-class Sanction(SanctionBase):
+class SanctionRead(SanctionBase):
     id: int
-    created_at: datetime
 
     class Config:
         orm_mode = True

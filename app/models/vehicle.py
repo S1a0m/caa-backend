@@ -9,6 +9,6 @@ class Vehicle(Base):
     plate_number = Column(String, unique=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
 
-    permitted = Column(Boolean, default=False)
+    permitted = Column(Boolean, default=False) # contrôlé et donc peut démarrer
 
     owner = relationship("User", back_populates="vehicles")

@@ -1,8 +1,9 @@
-# app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import sanctions, user, crossroad, vehicle, traffic_light
+from app.routes import sanctions, crossroad, vehicle, traffic_light
 from dotenv import load_dotenv
+
+from app.routes import vehicle
 load_dotenv()
 
 app = FastAPI()
@@ -17,11 +18,12 @@ app.add_middleware(
 )
 
 # Inclusion des routes
-app.include_router(user.router, prefix="/user", tags=["User"])
-app.include_router(vehicle.router, prefix="/vehicle", tags=["Vehicle"])
-app.include_router(crossroad.router, prefix="/crossroad", tags=["Crossroad"])
-app.include_router(traffic_light.router, prefix="/light", tags=["Light"])
+# app.include_router(vehicle.router, prefix="/user", tags=["User"])
+app.include_router(sanctions.router)
+app.include_router(vehicle.router)
+app.include_router(crossroad.router)
+app.include_router(traffic_light.router)
 
 @app.get("/")
 def root():
-    return {"message": "Backend FastAPI prêt 🔥"}
+    return {"Connected": True}

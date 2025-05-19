@@ -2,12 +2,15 @@ from pydantic import BaseModel
 from typing import Optional
 
 class UserBase(BaseModel):
-    matricule: str
+    name: str
+    surname: str
+    address: str
+    email: str
 
 class UserCreate(UserBase):
     pass
 
-class UserInDB(UserBase):
+class UserRead(UserBase):
     id: int
 
     class Config:

@@ -18,7 +18,7 @@ class TrafficLight(Base):
     latitude = Column(Float)
     longitude = Column(Float)
 
-    create_at = Column(DateTime, default=datetime.utcnow)
+    create_at = Column(DateTime, default=lambda: datetime.utcnow().timestamp())
     traffic_light_cycle = Column(Integer, nullable=False)
     red_cycle = Column(Integer, nullable=False)
     orange_cycle = Column(Integer, nullable=False)
@@ -28,6 +28,6 @@ class TrafficLight(Base):
 
     turn_right_if_red = Column(Boolean, default=False)
 
-    vitesse_limite = Column(Integer, default=60)
+    speed_limit = Column(Integer, default=60)
 
     crossroad = relationship("Crossroad", back_populates="traffic_lights")

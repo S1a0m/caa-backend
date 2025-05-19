@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from app.models import user, vehicle  # Adapte selon ton import
+from app.models import user, vehicle  
 from typing import Optional
 
 def get_user_by_vehicle_plate(db: Session, plate_number: str) -> Optional[user.User]:
