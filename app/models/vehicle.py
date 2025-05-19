@@ -1,8 +1,14 @@
-from sqlalchemy import Column, Integer, String
-from core.database import Base
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy.orm import relationship
+from ..core.database import Base
 
 class Vehicle(Base):
     __tablename__ = "vehicles"
 
     id = Column(Integer, primary_key=True, index=True)
-    plate = Column(String, unique=True, nullable=False)
+    plate_number = Column(String, unique=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
+    permitted = Column(Boolean, default=False)
+
+    owner = relationship("User", back_populates="vehicles")
