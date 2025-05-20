@@ -6,9 +6,13 @@ from sqlalchemy import pool
 from alembic import context
 
 import sys
-sys.path.append("./")
+import os
 from app.core.database import Base
-from app.models import sanction  # importe tous tes modèles ici
+from app.models import sanction, crossroad, traffic_light, user, vehicle
+
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 
 
 # this is the Alembic Config object, which provides

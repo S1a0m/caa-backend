@@ -18,7 +18,7 @@ class TrafficLight(Base):
     latitude = Column(Float)
     longitude = Column(Float)
 
-    create_at = Column(DateTime, default=lambda: datetime.utcnow().timestamp())
+    create_at = Column(Float, default=lambda: datetime.utcnow().timestamp())
     traffic_light_cycle = Column(Integer, nullable=False)
     red_cycle = Column(Integer, nullable=False)
     orange_cycle = Column(Integer, nullable=False)

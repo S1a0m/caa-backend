@@ -20,7 +20,8 @@ def record_use_plate_number(plate_number: str, db: Session = Depends(get_db)):
     vehicle = crud_vehicle.get_vehicle_by_matricule(db, plate_number)
     if vehicle: 
         user = crud_user.get_user_by_vehicle_plate(db, plate_number)
-        confirmation_link = f"http://localhost:8000/vehicle/confirm-plate/{plate_number}"
+        print("Voila ça:", user.email)
+        confirmation_link = f"http://192.168.55.114:8000/vehicle/confirm-plate/{plate_number}"
         send_confirmation_email(to_email=user.email, confirmation_url=confirmation_link, receiver_name=user.name, receiver_surname=user.surname, vehicle_plate_number=plate_number)
         return {"found": True}
     return {"found": False}
@@ -36,3 +37,7 @@ def confirm_plate(plate_number: str, db: Session = Depends(get_db)):
     db.refresh(vehicle)
 
     return {"message": f"Modification effectuée pour {plate_number}."}
+
+@router.post("/", response_model=schema_vehicle.VehicleCreate)
+def create_vehicle(crossroad: schema_vehicle.VehicleCreate, db: Session = Depends(get_db)):
+    return crud_vehicle.create_vehicle(db, crossroad)

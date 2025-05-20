@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app.schemas.crossroad import CrossroadBase
-from app.crud.crossroad import get_crossroads_coordinates
+from app.schemas.crossroad import CrossroadBase, CrossroadCreate
+from app.crud.crossroad import get_crossroads_coordinates, register_crossroad
 from app.crud.traffic_light import get_traffic_lights_by_crossroad, get_trafic_light_state
 from app.routes.deps.dependencies import get_db
 from app.utils.geolocalisation import haversine, find_nearest_point
@@ -56,8 +56,12 @@ def handle_gps(coords: CrossroadBase, db: Session = Depends(get_db)):
 
     return {
         "status": True,
-        "crossroad_id": matched_crossroad.id,
+        "crossroad_name": matched_crossroad.name,
         "traffic_light_id": nearest_tl.id,
         "distance_m": round(distance * 1000, 2),
         "state": state
     }
+
+@router.post("/crossroad", response_model=CrossroadCreate)
+def create_crossroad(crossroad: CrossroadCreate, db: Session = Depends(get_db)):
+    return register_crossroad(db, crossroad)

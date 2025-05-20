@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import sanctions, crossroad, vehicle, traffic_light
+from app.routes import sanctions, crossroad, vehicle, traffic_light, user
 from dotenv import load_dotenv
 
 from app.routes import vehicle
@@ -18,7 +18,7 @@ app.add_middleware(
 )
 
 # Inclusion des routes
-# app.include_router(vehicle.router, prefix="/user", tags=["User"])
+app.include_router(user.router)
 app.include_router(sanctions.router)
 app.include_router(vehicle.router)
 app.include_router(crossroad.router)
